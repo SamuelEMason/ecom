@@ -8,7 +8,8 @@ import {
 } from 'react-router-dom';
 
 import App from './App';
-import Home from './pages/Home';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
 
 import './assets/styles/bootstrap.custom.css';
 import './assets/styles/index.css';
@@ -16,7 +17,8 @@ import './assets/styles/index.css';
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path='/' element={<App />}>
-			<Route index={true} path='/' element={<Home />} />
+			<Route index={true} path='/' element={<HomePage />} />
+			<Route path='/product/:id' element={<ProductPage />} />
 		</Route>
 	)
 );
