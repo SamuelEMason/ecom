@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import products from '../products';
 import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 import { formattedReviewCount } from '../utils';
 import Rating from '../components/Rating';
+import axios from 'axios';
 
 const productStatus = (countInStock) =>
 	countInStock > 0 ? 'In Stock' : 'Out of Stock';
 
 export default function ProductPage() {
 	const { id: productId } = useParams();
-	const product = products.find((product) => product._id === productId);
+	const [product, setProduct] = useState({});
+
+	useEffect(() => {
+		const fetchProductByID = async () => {
+			try {
+				const { data } = await axios.get(`/api/products/${productId}`);
+				setProduct(data);
+			} catch (error) {
+				throw error;
+			}
+		};
+
+		fetchProductByID();
+	}, [productId]);
 
 	return (
 		<>
